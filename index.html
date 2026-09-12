@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>体験会希望の方（リニューアル案） | Code//（コードすらすら）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFFFFF;
+    --paper:#FFFFFF;
+    --ink:#1A1A1A;
+    --ink-soft:#6E6E6E;
+    --line:#DDDDDD;
+    --navy:#1A1A1A;
+    --navy2:#333333;
+    --sky:#F2F2F2;
+    --sky-line:#CCCCCC;
+    --warm:#1A1A1A;
+    --warm-dark:#000000;
+    --warm-tint:#F0F0F0;
+    --teal:#1A1A1A;
+    --teal-tint:#F2F2F2;
+    --blue-a:#4D4D4D;
+    --blue-b:#1A1A1A;
+    --radius-lg:24px;
+    --radius-md:14px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Noto Sans JP', sans-serif;
+    line-height:1.8;
+  }
+  h1,h2,h3,.display{
+    font-family:'Zen Maru Gothic', sans-serif;
+    color:var(--navy);
+    margin:0;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+  nav{background:var(--paper);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1040px;}
+  nav .logo{font-family:'Zen Maru Gothic';font-weight:900;font-size:20px;color:var(--navy);}
+  nav ul{list-style:none;display:flex;margin:0;padding:0;font-size:13px;}
+  nav li{margin-left:20px;}
+  nav a{color:var(--ink-soft);text-decoration:none;}
+  nav .current{color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:4px;}
+
+  section{padding:56px 0;}
+  .note{
+    font-size:12px;color:var(--ink-soft);
+    background:var(--warm-tint);border:1px dashed var(--warm-dark);
+    border-radius:8px;padding:6px 12px;display:inline-block;margin-bottom:8px;
+  }
+
+  /* CTA BUTTON (3D pill, LITALICO-style) */
+  .cta-btn{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--warm);color:#fff;text-decoration:none;
+    font-family:'Zen Maru Gothic';font-weight:700;font-size:16px;
+    padding:16px 40px;border-radius:999px;
+    box-shadow:0 6px 0 var(--warm-dark);
+    transition:transform .12s, box-shadow .12s;
+  }
+  .cta-btn:hover{transform:translateY(3px);box-shadow:0 3px 0 var(--warm-dark);}
+
+  /* HERO */
+  .hero{text-align:center;}
+  .badge-wakuwaku{
+    display:inline-block;background:var(--navy);color:#fff;
+    font-family:'Zen Maru Gothic';font-weight:700;font-size:14px;
+    padding:6px 18px;border-radius:999px;margin-bottom:18px;
+  }
+  .hero .kicker{font-size:14px;color:var(--ink-soft);margin-bottom:6px;}
+  .hero h1{font-size:26px;font-weight:900;line-height:1.6;margin-bottom:10px;}
+  .hero .sub{font-size:20px;font-weight:700;color:var(--warm-dark);margin-bottom:22px;}
+  .photo-slot{
+    border:2px dashed var(--sky-line);background:var(--sky);
+    border-radius:var(--radius-lg);
+    padding:24px 28px;
+    margin:0 auto 20px;max-width:720px;
+    text-align:left;
+  }
+  .photo-slot .cap{font-size:13px;color:var(--navy);font-weight:700;margin:0 0 10px;text-align:center;}
+  .photo-slot .sub-cap{font-size:12px;color:var(--ink-soft);margin:10px 0 0;text-align:center;}
+  .shot-list{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;}
+  .shot-list li{font-size:12px;color:var(--ink);line-height:1.7;padding-left:14px;position:relative;}
+  .shot-list li::before{content:'-';position:absolute;left:0;color:var(--ink-soft);}
+  .shot-list b{font-weight:700;}
+  .shot-ng{font-size:12px;color:var(--ink-soft);margin:14px 0 0;padding-top:10px;border-top:1px solid var(--sky-line);}
+  .pill-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .pill{background:var(--teal-tint);color:var(--teal);font-size:12px;font-weight:700;padding:6px 14px;border-radius:999px;}
+
+  .section-head{text-align:center;margin-bottom:32px;}
+  .section-head h2{font-size:22px;font-weight:900;}
+  .section-head .desc{font-size:13px;color:var(--ink-soft);margin-top:8px;line-height:1.8;}
+  .section-head .accent{color:var(--warm-dark);text-decoration:underline;text-decoration-color:var(--warm);text-underline-offset:4px;}
+
+  /* VALUE PENTAGON DIAGRAM */
+  .pentagon-wrap{position:relative;width:560px;max-width:100%;height:460px;margin:0 auto;}
+  .pentagon-label{position:absolute;transform:translate(-50%,-50%);width:160px;text-align:center;}
+  .pentagon-label .t{font-family:'Zen Maru Gothic';font-weight:700;font-size:14px;color:var(--navy);margin:0 0 3px;}
+  .pentagon-label .d{font-size:11px;color:var(--ink-soft);margin:0;line-height:1.5;}
+
+  /* COMPARISON TABLE (LITALICO-style) */
+  .compare-table{border-radius:var(--radius-lg);overflow:hidden;background:var(--paper);box-shadow:0 6px 20px rgba(0,0,0,0.06);}
+  .compare-cat{background:var(--sky);color:var(--navy);text-align:center;font-weight:700;font-size:13px;padding:8px;}
+  .compare-row-single{background:#FFFCF3;padding:18px 20px;font-size:13px;}
+  .compare-row-single .t{font-weight:700;margin-bottom:4px;color:var(--warm-dark);}
+
+  /* FEATURE BADGES */
+  .badges{display:flex;flex-wrap:wrap;gap:12px;}
+  .badge-card{flex:1 1 28%;min-width:150px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-md);padding:18px 10px;text-align:center;}
+  .badge-card .icon{width:34px;height:34px;border-radius:50%;background:var(--sky);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:14px;color:var(--navy);font-weight:700;}
+  .badge-card p{margin:0;font-size:13px;font-weight:500;}
+
+  .video-slot{border:2px dashed var(--line);background:var(--paper);border-radius:var(--radius-lg);height:200px;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);font-size:13px;max-width:560px;margin:0 auto;}
+
+  .schedule-grid{display:flex;flex-wrap:wrap;gap:16px;}
+  .schedule-card{flex:1 1 45%;min-width:260px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-md);padding:18px 20px;}
+  .schedule-card h3{font-size:14px;font-weight:700;margin-bottom:10px;}
+  .schedule-card .time{display:inline-block;background:var(--sky);color:var(--navy);font-size:13px;font-weight:700;border-radius:8px;padding:4px 10px;margin:3px 4px 3px 0;}
+  .schedule-note{font-size:12px;color:var(--ink-soft);margin-top:10px;line-height:1.7;}
+
+  .faq-cat{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-md);margin-bottom:12px;overflow:hidden;}
+  .faq-cat > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:16px 18px;font-weight:700;font-size:15px;color:var(--navy);}
+  .faq-cat > summary::-webkit-details-marker{display:none;}
+  .faq-cat > summary::after{content:'+';margin-left:auto;font-size:18px;color:var(--ink-soft);}
+  .faq-cat[open] > summary::after{content:'−';}
+  .faq-body{padding:0 18px 18px 18px;}
+  .qa{padding:12px 0;border-top:1px solid var(--line);}
+  .qa:first-child{border-top:none;}
+  .qa .q{font-weight:700;font-size:13px;color:var(--warm-dark);margin-bottom:4px;}
+  .qa .a{font-size:13px;color:var(--ink);}
+
+  .stat-callout{display:flex;align-items:center;gap:18px;background:var(--sky);border-radius:var(--radius-md);padding:16px 20px;margin:10px 0 16px;}
+  .stat-callout .num{font-family:'Zen Maru Gothic';font-size:34px;font-weight:900;color:var(--navy);}
+  .stat-callout .txt{font-size:12px;color:var(--navy);line-height:1.6;}
+
+  .price-table{width:100%;border-collapse:collapse;background:var(--paper);border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--line);}
+  .price-table th,.price-table td{padding:14px 16px;text-align:left;font-size:13px;border-bottom:1px solid var(--line);}
+  .price-table th{background:var(--sky);color:var(--navy);font-weight:700;}
+  .price-table tr:last-child td{border-bottom:none;}
+  .price-table .yen{font-weight:700;color:var(--warm-dark);}
+  .price-note{font-size:12px;color:var(--ink-soft);margin-top:10px;}
+
+  .cta-box{text-align:center;background:var(--navy);color:#fff;border-radius:var(--radius-lg);padding:44px 24px;}
+  .cta-box p{color:#D9D9D9;font-size:13px;margin-bottom:20px;}
+
+  footer{padding:32px 0;text-align:center;font-size:12px;color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">Code// コードすらすら</div>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">イベント案内</a></li>
+      <li><a href="#">教室紹介</a></li>
+      <li><a href="#">当教室の特徴</a></li>
+      <li><a href="#">講座案内</a></li>
+      <li><a href="#" class="current">体験会希望の方</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero" style="padding-top:40px;">
+    <span class="badge-wakuwaku">こころワクワク</span>
+    <p class="kicker">学校の勉強が苦手な子ほどハマる。「正解より直し方」</p>
+    <h1>プログラミング体験</h1>
+    <p class="sub">考えて、試して、できた！が増える教室</p>
+
+    <div class="photo-slot">
+      <span class="note">写真差し替え予定（9〜10月撮影後）</span>
+      <p class="cap">撮影メモ：トップ写真</p>
+      <ul class="shot-list">
+        <li><b>被写体</b>：生徒1〜2名（小中学生）が、ロボットやPCなどの教材を実際に操作している場面</li>
+        <li><b>表情</b>：真剣に考えている顔、または「できた！」の瞬間の自然な笑顔。作られた笑顔は避ける</li>
+        <li><b>構図</b>：横向き（landscape）。被写体はやや左〜中央に。右側は文字が乗るので余白を残す</li>
+        <li><b>目線</b>：カメラ目線ではなく、手元や教材に集中している自然な角度がこころワクワク感に合う</li>
+        <li><b>背景</b>：教室の様子が少し分かる程度にぼかす。散らかった机や余計な私物は写り込ませない</li>
+        <li><b>光</b>：できるだけ自然光が入る時間帯。明るく開放的なトーンにする</li>
+      </ul>
+      <p class="shot-ng">NG例：無表情・伏し目がち／俯瞰で顔が見えない／教室が暗く写る／講師だけが目立つ構図</p>
+      <p class="sub-cap">既存の join_robot.png / join_img はここに配置</p>
+    </div>
+
+    <div class="pill-row">
+      <span class="pill">まずは60分、無料で体験！</span>
+      <span class="pill">未経験でも安心・キーボード打てなくてもOK</span>
+      <span class="pill">先着順・各回定員3名</span>
+    </div>
+    <p class="schedule-note">枠が埋まるのが早いので、お早めのご予約をお勧めします。</p>
+    <div style="margin-top:24px;">
+      <a class="cta-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfRHjwJ7wMBX59UmCCwNGyOrUsgWNQfpbfIhcNFGXM_BQho0A/viewform?usp=dialog">無料体験に申し込む →</a>
+    </div>
+  </section>
+
+  <!-- VALUE PENTAGON DIAGRAM -->
+  <section>
+    <div class="section-head">
+      <h2>コードすらすらで身につけてほしい、5つの力</h2>
+      <p class="desc">こころワクワクしながら、<span class="accent">考えて・試して・できた</span>を積み重ねる中で育てたい力です。</p>
+    </div>
+    <div class="pentagon-wrap">
+      <svg viewBox="0 0 560 460" width="100%" height="100%">
+        <polygon points="280,100 394,183 351,317 209,317 166,183" fill="var(--sky)" stroke="var(--navy2)" stroke-width="2"/>
+        <circle cx="280" cy="100" r="5" fill="var(--navy2)"/>
+        <circle cx="394" cy="183" r="5" fill="var(--navy2)"/>
+        <circle cx="351" cy="317" r="5" fill="var(--navy2)"/>
+        <circle cx="209" cy="317" r="5" fill="var(--navy2)"/>
+        <circle cx="166" cy="183" r="5" fill="var(--navy2)"/>
+      </svg>
+      <div class="pentagon-label" style="left:280px;top:38px;">
+        <p class="t">①本質を見抜く力</p><p class="d">重要な点を推察判断する力</p>
+      </div>
+      <div class="pentagon-label" style="left:465px;top:163px;">
+        <p class="t">②情報収集能力</p><p class="d">情報を収集し、取捨選択する力</p>
+      </div>
+      <div class="pentagon-label" style="left:397px;top:382px;">
+        <p class="t">③創造力</p><p class="d">新たなアイデアや解決策を創出する力</p>
+      </div>
+      <div class="pentagon-label" style="left:163px;top:382px;">
+        <p class="t">④挑戦力</p><p class="d">失敗を恐れず挑戦し経験を積む力</p>
+      </div>
+      <div class="pentagon-label" style="left:95px;top:163px;">
+        <p class="t">⑤失敗から学べる力</p><p class="d">失敗を成功への機会として活かす力</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRENGTHS (Code// only, no competitor mentions) -->
+  <section>
+    <div class="section-head">
+      <h2>Code//の強み・特色</h2>
+      <p class="desc">通う中で大事にしていることをまとめました</p>
+    </div>
+    <div class="compare-table">
+      <div class="compare-cat">授業形式</div>
+      <div class="compare-row-single">
+        <p class="t">少人数制・ミッション形式</p>最大5名。前回どこでつまずいたかを記録し、次の授業につなげます。
+      </div>
+
+      <div class="compare-cat">目的</div>
+      <div class="compare-row-single">
+        <p class="t">情報を苦手にしない土台作り</p>プログラマー養成が目的ではなく、考える力・自己解決力を養います。
+      </div>
+
+      <div class="compare-cat">保護者への共有</div>
+      <div class="compare-row-single">
+        <p class="t">その日の内容を毎回共有</p>親子参加型なので、その場で見ていただくことも可能です。
+      </div>
+
+      <div class="compare-cat">家庭でのフォロー</div>
+      <div class="compare-row-single">
+        <p class="t">教室内でサポートし切ります</p>今の親世代が習っていない分野だからこそ、教室で完結できるようにしています。
+      </div>
+    </div>
+  </section>
+
+  <!-- MINI CTA -->
+  <section style="padding:0 0 56px;text-align:center;">
+    <p class="schedule-note" style="margin-bottom:14px;">気になったら、まずは60分の無料体験から。</p>
+    <a class="cta-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfRHjwJ7wMBX59UmCCwNGyOrUsgWNQfpbfIhcNFGXM_BQho0A/viewform?usp=dialog">無料体験に申し込む →</a>
+  </section>
+
+  <!-- FEATURE BADGES (existing) -->
+  <section>
+    <div class="section-head">
+      <h2>教室のポイント</h2>
+    </div>
+    <div class="badges">
+      <div class="badge-card"><div class="icon">P</div><p>駐輪場あり</p></div>
+      <div class="badge-card"><div class="icon">C</div><p>車OK（要連絡）</p></div>
+      <div class="badge-card"><div class="icon">◎</div><p>未経験者歓迎</p></div>
+      <div class="badge-card"><div class="icon">KB</div><p>キーボード打てなくてもOK！</p></div>
+      <div class="badge-card"><div class="icon">5</div><p>少人数制5名</p></div>
+      <div class="badge-card"><div class="icon">✓</div><p>個人ペースでOK</p></div>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section>
+    <div class="section-head"><h2>教室の雰囲気</h2></div>
+    <div class="video-slot"><span class="note">既存動画（beenet_join_2x_hq.mp4）をここに埋め込み</span></div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section>
+    <div class="section-head"><h2>体験会時間割・開催日</h2></div>
+    <div class="schedule-grid">
+      <div class="schedule-card">
+        <h3>毎週 土曜日・日曜日</h3>
+        <span class="time">10:00〜</span>
+        <span class="time">11:30〜</span>
+        <span class="time">13:30〜</span>
+        <span class="time">15:00〜（土曜満席）</span>
+        <span class="time">16:30〜</span>
+      </div>
+      <div class="schedule-card">
+        <h3>【9月限定】火・金曜日</h3>
+        <span class="time">15:30〜</span>
+        <span class="time">17:00〜</span>
+        <p class="schedule-note">※9/22（火）は祝日のためお休みです<br>※9/29の週（5週目）はお休みです</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MINI CTA -->
+  <section style="padding:0 0 56px;text-align:center;">
+    <p class="schedule-note" style="margin-bottom:14px;">先着順・各回定員3名です。空きがあるうちにご予約ください。</p>
+    <a class="cta-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfRHjwJ7wMBX59UmCCwNGyOrUsgWNQfpbfIhcNFGXM_BQho0A/viewform?usp=dialog">無料体験に申し込む →</a>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="section-head">
+      <h2>よくあるご質問</h2>
+      <p class="desc">申し込み前によくいただくご質問をまとめました</p>
+    </div>
+
+    <details class="faq-cat" open>
+      <summary>なぜ「情報」を学ぶ必要があるの？</summary>
+      <div class="faq-body">
+        <div class="stat-callout">
+          <div class="num">97%</div>
+          <div class="txt">の国立大学が、大学入学共通テストで「情報Ⅰ」を必須としています。<br>文系・理系を問わず、高校生全員が学ぶ必履修科目です。</div>
+        </div>
+        <div class="qa">
+          <p class="q">Q. うちは理系じゃないので、関係ないと思っていました。</p>
+          <p class="a">「情報Ⅰ」は文系・理系を問わず、高校生全員が学ぶ必履修科目です。大学入学共通テストでも、国立大学の97%が必須としています。理系だけの話ではなくなりました。</p>
+        </div>
+        <div class="qa">
+          <p class="q">Q. プログラマーにするつもりはないのですが。</p>
+          <p class="a">私たちも、プログラマーを育てる教室ではありません。目的は「学校でも社会でも避けにくくなった情報という分野を、早い段階で苦手にしない」ことです。ピアノを習った子が全員ピアニストにならないのと同じです。</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="faq-cat">
+      <summary>他の習い事と何が違うの？</summary>
+      <div class="faq-body">
+        <div class="qa">
+          <p class="q">Q. 他の習い事もあって、優先順位が決めにくいです。</p>
+          <p class="a">正直に申し上げます。スポーツや音楽を辞めてまで来る必要はありません。ただし、情報には他の習い事と違う点が1つあります。家庭でフォローができないということです。算数でつまずけば親が教えられます。ピアノは家で練習できます。でも情報は、今の親世代が学校で習っていないため、家庭でのフォローがほぼ効きません。だからこそ、外で触れておく価値があります。まずは月2回（8,800円）から始められます。</p>
+        </div>
+        <div class="qa">
+          <p class="q">Q. 英語やそろばんと一緒に、学童でもプログラミングをやっているようですが、違いは何ですか。</p>
+          <p class="a">「触れる」ことが目的の場と、「できるようになる」ことが目的の場の違いです。code//は最大5人の少人数で、ミッション形式で段階的に進みます。前回どこまでできたか、今どこでつまずいているかを記録し、次につなげます。触れて楽しかったで終わらせません。</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="faq-cat">
+      <summary>通っている間、安心できる？</summary>
+      <div class="faq-body">
+        <div class="qa">
+          <p class="q">Q. ゲームを作れると聞いて別の教室に通わせましたが、何をやっているのか分かりませんでした。</p>
+          <p class="a">よくいただくご相談です。code//では、その日に何をやったかを保護者の方にお伝えします。また、親子参加型なので、その場で見ていただくこともできます。「何をやっているか分からないまま月謝を払う」状態を作らないことを、方針にしています。</p>
+        </div>
+        <div class="qa">
+          <p class="q">Q. 親がまったく分からないのですが、それでも大丈夫ですか。</p>
+          <p class="a">むしろ、それが普通です。今の親世代の多くは、学校で情報を体系的に学ぶ機会がありませんでした。分からないのは当然で、恥ずかしいことではありません。その「分からない」を、お子さんと一緒に少しずつ解消していける場としてお使いください。</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="faq-cat">
+      <summary>始めやすさについて</summary>
+      <div class="faq-body">
+        <div class="qa">
+          <p class="q">Q. 家にパソコンがありません。</p>
+          <p class="a">教室の機材をお使いいただけます。ご家庭での購入は必須ではありません。</p>
+        </div>
+        <div class="qa">
+          <p class="q">Q. 何年生から始めるのがいいですか。</p>
+          <p class="a">小学校低学年から高校生までを対象としています。低学年のうちは、キーボードよりも「順番に考える」「試して直す」経験を重視します。学年に応じた内容をご用意していますので、まずはご相談ください。</p>
+        </div>
+        <div class="qa">
+          <p class="q">Q. 途中で合わなかったらどうすればいいですか。</p>
+          <p class="a">まず無料体験で判断してください。合わないと感じられた場合、無理にお勧めすることはありません。「うちの子に必要か」を相談してから決めていただく教室です。</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- PRICING -->
+  <section>
+    <div class="section-head"><h2>料金</h2></div>
+    <table class="price-table">
+      <tr><th>コース</th><th>月額</th></tr>
+      <tr><td>月2回コース</td><td class="yen">8,800円</td></tr>
+      <tr><td>月4回コース</td><td class="yen">17,600円</td></tr>
+      <tr><td>施設費</td><td class="yen">1,650円 / 月</td></tr>
+      <tr><td>入会金</td><td class="yen">17,600円</td></tr>
+    </table>
+    <p class="price-note">※まずは月2回コースから始められます。</p>
+  </section>
+
+  <!-- CTA -->
+  <section>
+    <div class="cta-box">
+      <h2 style="color:#fff;font-size:20px;margin-bottom:10px;">まずは60分、無料で体験！</h2>
+      <p>お子さんに必要かどうかは、体験してから決めてください。</p>
+      <a class="cta-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfRHjwJ7wMBX59UmCCwNGyOrUsgWNQfpbfIhcNFGXM_BQho0A/viewform?usp=dialog">無料体験に申し込む →</a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  【プログラミングスクール】Code// 〒569-1106 大阪府高槻市安満新町1番12号 RockGarden Ⅲ 2階　072-648-3350<br>
+  Copyright © Code//（コードすらすら） All Rights Reserved.
+</footer>
+
+</body>
+</html>
